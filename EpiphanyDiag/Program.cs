@@ -70,6 +70,9 @@ namespace EpiphanyDiag
             Directory.Delete(tempPath, true);
             File.Delete(tempPath + "\\..\\EpiphanyDiagnostics.tar");
             Console.WriteLine("done");
+
+            Console.WriteLine("Finished!\nDiagnostic information saved to EpiphanyDiagnostics.tar.gz\nPress any key to exit.");
+            Console.ReadKey();
         }
     }
 }
