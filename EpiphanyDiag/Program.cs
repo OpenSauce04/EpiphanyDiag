@@ -12,7 +12,7 @@ namespace EpiphanyDiag
             Console.ForegroundColor = ConsoleColor.DarkRed;
 			Console.Write("Epiphany ");
             Console.ForegroundColor = ConsoleColor.White;
-            Console.Write("Diagnostics Tool v0.1 | ");
+            Console.Write("Diagnostics Tool v1.0 | ");
             Console.ForegroundColor = ConsoleColor.DarkGray;
             Console.WriteLine("Written by OpenSauce\nSource available at: https://github.com/OpenSauce04/EpiphanyDiag\n");
             
