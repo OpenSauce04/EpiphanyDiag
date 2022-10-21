@@ -60,7 +60,11 @@ namespace EpiphanyDiag
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.Write("  Getting mod list...");
             string[] modList = Directory.GetDirectories(AppDomain.CurrentDomain.BaseDirectory + "..\\"); // From the Epiphany folder, this should be the mods folder
-            File.WriteAllLines(tempPath + "\\modlist.txt", modList);
+            for (int i = 0; i < modList.Length; i++)
+            {
+                modList[i] = Path.GetFileName(modList[i]);
+            }
+                File.WriteAllLines(tempPath + "\\modlist.txt", modList);
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("done");
 
