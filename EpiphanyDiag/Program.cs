@@ -84,6 +84,8 @@ namespace EpiphanyDiag
             using var compressor = new GZipStream(gzipFile, CompressionMode.Compress);
             tarFile.CopyTo(compressor);
             tarFile.Close();
+            compressor.Flush();
+            compressor.Close();
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("done");
 
