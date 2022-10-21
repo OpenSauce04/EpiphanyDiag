@@ -23,11 +23,29 @@ namespace EpiphanyDiag
 
             if (validFolder) {
                 Console.WriteLine("Isaac Repentance log folder found.");
+                Console.WriteLine("Generating diagnostics package...");
 			} else {
                 Console.WriteLine("ERROR: Could not find Isaac Repentance log folder!\nPress any key to exit.");
                 Console.ReadKey();
                 Environment.Exit(0);
             }
+
+            // --- PACKAGE LOGS --- ///
+            Console.Write("  Packaging logs...");
+            string tempPath = Path.GetTempPath() + "\\EpiphanyDiag";
+            if (Directory.Exists(tempPath)) Directory.Delete(tempPath, true);
+            Directory.CreateDirectory(tempPath);
+            Directory.CreateDirectory(tempPath + "\\logs");
+
+            foreach (string logFile in logFiles)
+            {
+                File.Copy(logFile, tempPath + "\\logs\\" + Path.GetFileName(logFile));
+            }
+
+            TarFile.CreateFromDirectory(tempPath + "\\logs", tempPath + "\\logs.tar", false);
+            Console.WriteLine("done");
+
+
 
         }
     }
