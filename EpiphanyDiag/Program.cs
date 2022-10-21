@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Formats.Tar;
 using System.IO;
-using System.Linq;
+using System.IO.Compression;
 
 namespace EpiphanyDiag
 {
@@ -30,8 +30,8 @@ namespace EpiphanyDiag
                 Environment.Exit(0);
             }
 
-            // --- PACKAGE LOGS --- ///
-            Console.Write("  Packaging logs...");
+            // --- PACKAGE LOGS --- //
+            Console.Write("  Grabbing logs...");
             string tempPath = Path.GetTempPath() + "\\EpiphanyDiag";
             if (Directory.Exists(tempPath)) Directory.Delete(tempPath, true);
             Directory.CreateDirectory(tempPath);
@@ -42,11 +42,31 @@ namespace EpiphanyDiag
                 File.Copy(logFile, tempPath + "\\logs\\" + Path.GetFileName(logFile));
             }
 
-            TarFile.CreateFromDirectory(tempPath + "\\logs", tempPath + "\\logs.tar", false);
             Console.WriteLine("done");
 
+            // --- GET MOD LIST --- //
+            Console.Write("  Getting mod list...");
+            string[] modList = Directory.GetDirectories(AppDomain.CurrentDomain.BaseDirectory + "..\\"); // From the Epiphany folder, this should be the mods folder
+            File.WriteAllLines(tempPath + "\\modlist.txt", modList);
+            Console.WriteLine("done");
 
+            // --- PACKAGE FILES --- //
+            Console.Write("  Packaging files...");
+            if (File.Exists(tempPath + "\\..\\EpiphanyDiagnostics.tar")) File.Delete(tempPath + "\\..\\EpiphanyDiagnostics.tar");
+            TarFile.CreateFromDirectory(tempPath, tempPath + "\\..\\EpiphanyDiagnostics.tar", false);
+            Console.WriteLine("done");
 
+            // --- COMPRESS FILES --- //
+            using FileStream tarFile = File.Open(tempPath + "\\..\\EpiphanyDiagnostics.tar", FileMode.Open);
+            using FileStream gzipFile = File.Create(AppDomain.CurrentDomain.BaseDirectory + "\\EpiphanyDiagnostics.tar.gz");
+            using var compressor = new GZipStream(gzipFile, CompressionMode.Compress);
+            tarFile.CopyTo(compressor);
+            tarFile.Close();
+
+            // --- CLEAN UP --- //
+            Console.Write("  Cleaning up...");
+            Directory.Delete(tempPath, true);
+            File.Delete(tempPath + "\\..\\EpiphanyDiagnostics.tar");
         }
     }
 }
