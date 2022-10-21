@@ -14,7 +14,7 @@ namespace EpiphanyDiag
             Console.ForegroundColor = ConsoleColor.White;
             Console.Write("Diagnostics Tool v0.1 | ");
             Console.ForegroundColor = ConsoleColor.DarkGray;
-            Console.WriteLine("Written by OpenSauce\n");
+            Console.WriteLine("Written by OpenSauce\nSource available at: https://github.com/OpenSauce04/EpiphanyDiag\n");
             
 			string[] logFiles = Directory.GetFiles(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "\\Documents\\My Games\\Binding of Isaac Repentance", "*.txt", SearchOption.TopDirectoryOnly);
 
