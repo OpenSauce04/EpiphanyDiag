@@ -57,16 +57,19 @@ namespace EpiphanyDiag
             Console.WriteLine("done");
 
             // --- COMPRESS FILES --- //
+            Console.Write("  Compressing files...");
             using FileStream tarFile = File.Open(tempPath + "\\..\\EpiphanyDiagnostics.tar", FileMode.Open);
             using FileStream gzipFile = File.Create(AppDomain.CurrentDomain.BaseDirectory + "\\EpiphanyDiagnostics.tar.gz");
             using var compressor = new GZipStream(gzipFile, CompressionMode.Compress);
             tarFile.CopyTo(compressor);
             tarFile.Close();
+            Console.WriteLine("done");
 
             // --- CLEAN UP --- //
             Console.Write("  Cleaning up...");
             Directory.Delete(tempPath, true);
             File.Delete(tempPath + "\\..\\EpiphanyDiagnostics.tar");
+            Console.WriteLine("done");
         }
     }
 }
