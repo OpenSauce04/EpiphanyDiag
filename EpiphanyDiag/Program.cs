@@ -29,13 +29,19 @@ namespace EpiphanyDiag
                 }
             }
 
-            if (!File.Exists(AppDomain.CurrentDomain.BaseDirectory + "\\metadata.xml"))
+			if (new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory).Parent.Name != "mods")
+			{
+				validFolder = false;
+				ErrorString = "ERROR 3: This mod is not placed in the Isaac mods folder.\nPlease place Epiphany in the same folder as the rest of your mods";
+			}
+
+			if (!File.Exists(AppDomain.CurrentDomain.BaseDirectory + "\\metadata.xml"))
             {
                 validFolder = false;
                 ErrorString = "ERROR 2: This program is being run outside of the Epiphany folder.";
             }
 
-            if (validFolder) {
+			if (validFolder) {
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("Isaac Repentance log folder found.");
                 Console.ForegroundColor = ConsoleColor.Yellow;
