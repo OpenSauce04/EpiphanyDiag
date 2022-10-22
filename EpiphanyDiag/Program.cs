@@ -43,14 +43,13 @@ namespace EpiphanyDiag
             // --- PACKAGE LOGS --- //
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.Write("  Grabbing logs...");
-            string tempPath = Path.GetTempPath() + "\\EpiphanyDiag";
-            if (Directory.Exists(tempPath)) Directory.Delete(tempPath, true);
-            Directory.CreateDirectory(tempPath);
-            Directory.CreateDirectory(tempPath + "\\logs");
+            if (Directory.Exists(Strings.tempDir)) Directory.Delete(Strings.tempDir, true);
+            Directory.CreateDirectory(Strings.tempDir);
+            Directory.CreateDirectory(Strings.tempDir + "\\" + Strings.logDir);
 
             foreach (string logFile in logFiles)
             {
-                File.Copy(logFile, tempPath + "\\logs\\" + Path.GetFileName(logFile));
+                File.Copy(logFile, Strings.tempDir + "\\" + Strings.logDir + "\\" + Path.GetFileName(logFile));
             }
 
             Console.ForegroundColor = ConsoleColor.Green;
@@ -64,23 +63,23 @@ namespace EpiphanyDiag
             {
                 modList[i] = Path.GetFileName(modList[i]);
             }
-                File.WriteAllLines(tempPath + "\\modlist.txt", modList);
+                File.WriteAllLines(Strings.tempDir + "\\" + Strings.modList, modList);
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("done");
 
             // --- PACKAGE FILES --- //
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.Write("  Packaging files...");
-            if (File.Exists(tempPath + "\\..\\EpiphanyDiagnostics.tar")) File.Delete(tempPath + "\\..\\EpiphanyDiagnostics.tar");
-            TarFile.CreateFromDirectory(tempPath, tempPath + "\\..\\EpiphanyDiagnostics.tar", false);
+            if (File.Exists(Strings.tempDir + "\\..\\" + Strings.tarFile)) File.Delete(Strings.tempDir + "\\..\\" + Strings.tarFile);
+            TarFile.CreateFromDirectory(Strings.tempDir, Strings.tempDir + "\\..\\" + Strings.tarFile, false);
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("done");
 
             // --- COMPRESS FILES --- //
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.Write("  Compressing files...");
-            using FileStream tarFile = File.Open(tempPath + "\\..\\EpiphanyDiagnostics.tar", FileMode.Open);
-            using FileStream gzipFile = File.Create(AppDomain.CurrentDomain.BaseDirectory + "\\EpiphanyDiagnostics.tar.gz");
+            using FileStream tarFile = File.Open(Strings.tempDir + "\\..\\" + Strings.tarFile, FileMode.Open);
+            using FileStream gzipFile = File.Create(AppDomain.CurrentDomain.BaseDirectory + "\\" + Strings.gzipFile);
             using var compressor = new GZipStream(gzipFile, CompressionMode.Compress);
             tarFile.CopyTo(compressor);
             tarFile.Close();
@@ -92,14 +91,14 @@ namespace EpiphanyDiag
             // --- CLEAN UP --- //
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.Write("  Cleaning up...");
-            Directory.Delete(tempPath, true);
-            File.Delete(tempPath + "\\..\\EpiphanyDiagnostics.tar");
+            Directory.Delete(Strings.tempDir, true);
+            File.Delete(Strings.tempDir + "\\..\\" + Strings.tarFile);
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("done");
 
             Console.WriteLine("Finished!\n");
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("Diagnostic information saved to EpiphanyDiagnostics.tar.gz");
+            Console.WriteLine("Diagnostic information saved to " + Strings.gzipFile);
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("Press any key to exit.");
             Console.ReadKey();
