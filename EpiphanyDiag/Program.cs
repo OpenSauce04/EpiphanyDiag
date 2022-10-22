@@ -7,6 +7,7 @@ namespace EpiphanyDiag
 {
 	internal class Program
 	{
+        static string ErrorString = "";
 		static void Main(string[] args)
 		{
             Console.ForegroundColor = ConsoleColor.DarkRed;
@@ -19,11 +20,19 @@ namespace EpiphanyDiag
 			string[] logFiles = Directory.GetFiles(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "\\Documents\\My Games\\Binding of Isaac Repentance", "*.txt", SearchOption.TopDirectoryOnly);
 
 			bool validFolder = false;
-            foreach (string filePath in logFiles)
-            {
+            foreach (string filePath in logFiles) {
                 if (filePath.Contains("log.txt")) {
                     validFolder = true;
+                    break;
+                } else {
+                    ErrorString = "ERROR 1: Could not find Isaac Repentance log folder!";
                 }
+            }
+
+            if (!File.Exists(AppDomain.CurrentDomain.BaseDirectory + "\\metadata.xml"))
+            {
+                validFolder = false;
+                ErrorString = "ERROR 2: This program is being run outside of the Epiphany folder.";
             }
 
             if (validFolder) {
@@ -33,9 +42,9 @@ namespace EpiphanyDiag
                 Console.WriteLine("Generating diagnostics package...");
 			} else {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("ERROR: Could not find Isaac Repentance log folder!");
+                Console.WriteLine(ErrorString);
                 Console.ForegroundColor = ConsoleColor.White;
-                Console.WriteLine("Press any key to exit.");
+                Console.WriteLine("\nPress any key to exit.");
                 Console.ReadKey();
                 Environment.Exit(0);
             }
