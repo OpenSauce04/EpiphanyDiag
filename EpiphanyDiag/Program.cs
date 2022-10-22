@@ -55,7 +55,7 @@ namespace EpiphanyDiag
                 Environment.Exit(0);
             }
 
-            // --- PACKAGE LOGS --- //
+            // --- COPY LOGS --- //
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.Write("  Grabbing logs...");
             if (Directory.Exists(Strings.tempDir)) Directory.Delete(Strings.tempDir, true);
@@ -70,8 +70,11 @@ namespace EpiphanyDiag
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("done");
 
-            // --- GET MOD LIST --- //
-            Console.ForegroundColor = ConsoleColor.Yellow;
+            // --- GRAB EPIPHANY MANIFEST --- //  (too quick to be worth mentioning on-screen)
+            File.Copy(AppDomain.CurrentDomain.BaseDirectory + "\\metadata.xml", Strings.tempDir + "\\" + Strings.epiphanyManifest);
+
+			// --- GET MOD LIST --- //
+			Console.ForegroundColor = ConsoleColor.Yellow;
             Console.Write("  Getting mod list...");
             string[] modList = Directory.GetDirectories(AppDomain.CurrentDomain.BaseDirectory + "..\\"); // From the Epiphany folder, this should be the mods folder
             for (int i = 0; i < modList.Length; i++)
