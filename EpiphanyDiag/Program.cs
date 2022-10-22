@@ -29,7 +29,7 @@ namespace EpiphanyDiag
                 }
             }
 
-			if (new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory).Parent.Name != "mods"){}else // Okay then VStudio??????
+			if (new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory).Parent.Name != "mods")
 			{
 				validFolder = false;
 				ErrorString = "ERROR 3: This mod is not placed in the Isaac mods folder.\nPlease place Epiphany in the same folder as the rest of your mods";
