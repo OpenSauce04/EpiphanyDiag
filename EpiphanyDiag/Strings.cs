@@ -10,6 +10,7 @@ namespace EpiphanyDiag
 		public static string gzipFile = "EpiphanyDiagnostics.tar.gz";
 		public static string modList = "modList.txt";
 		public static string logDir = "logs";
+		public static string dataDir = "modData";
 		public static string epiphanyManifest = "epiphanyManifest.xml";
 	}
 }

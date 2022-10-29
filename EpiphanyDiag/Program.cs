@@ -81,12 +81,20 @@ namespace EpiphanyDiag
             {
                 modList[i] = Path.GetFileName(modList[i]);
             }
-                File.WriteAllLines(Strings.tempDir + "\\" + Strings.modList, modList);
+            File.WriteAllLines(Strings.tempDir + "\\" + Strings.modList, modList);
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("done");
 
-            // --- PACKAGE FILES --- //
-            Console.ForegroundColor = ConsoleColor.Yellow;
+			// --- COPY MOD DATA --- //
+			Console.ForegroundColor = ConsoleColor.Yellow;
+			Console.Write("  Copying mod data...");
+			Directory.CreateDirectory(Strings.tempDir + "\\" + Strings.dataDir);
+            CloneDirectory(AppDomain.CurrentDomain.BaseDirectory + "..\\..\\data\\", Strings.tempDir + "\\" + Strings.dataDir + "\\");
+			Console.ForegroundColor = ConsoleColor.Green;
+			Console.WriteLine("done");
+
+			// --- PACKAGE FILES --- //
+			Console.ForegroundColor = ConsoleColor.Yellow;
             Console.Write("  Packaging files...");
             if (File.Exists(Strings.tempDir + "\\..\\" + Strings.tarFile)) File.Delete(Strings.tempDir + "\\..\\" + Strings.tarFile);
             TarFile.CreateFromDirectory(Strings.tempDir, Strings.tempDir + "\\..\\" + Strings.tarFile, false);
@@ -121,5 +129,22 @@ namespace EpiphanyDiag
             Console.WriteLine("Press any key to exit.");
             Console.ReadKey();
         }
-    }
+		private static void CloneDirectory(string root, string dest) // Via https://stackoverflow.com/a/36484371
+		{
+			foreach (var directory in Directory.GetDirectories(root))
+			{
+				string dirName = Path.GetFileName(directory);
+				if (!Directory.Exists(Path.Combine(dest, dirName)))
+				{
+					Directory.CreateDirectory(Path.Combine(dest, dirName));
+				}
+				CloneDirectory(directory, Path.Combine(dest, dirName));
+			}
+
+			foreach (var file in Directory.GetFiles(root))
+			{
+				File.Copy(file, Path.Combine(dest, Path.GetFileName(file)));
+			}
+		}
+	}
 }
