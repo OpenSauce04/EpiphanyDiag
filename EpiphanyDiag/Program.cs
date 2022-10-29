@@ -2,6 +2,8 @@
 using System.Formats.Tar;
 using System.IO;
 using System.IO.Compression;
+using System.Xml;
+using System.Collections;
 
 namespace EpiphanyDiag
 {
@@ -70,20 +72,38 @@ namespace EpiphanyDiag
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("done");
 
+
             // --- GRAB EPIPHANY MANIFEST --- //  (too quick to be worth mentioning on-screen)
             File.Copy(AppDomain.CurrentDomain.BaseDirectory + "\\metadata.xml", Strings.tempDir + "\\" + Strings.epiphanyManifest);
+
 
 			// --- GET MOD LIST --- //
 			Console.ForegroundColor = ConsoleColor.Yellow;
             Console.Write("  Getting mod list...");
             string[] modList = Directory.GetDirectories(AppDomain.CurrentDomain.BaseDirectory + "..\\"); // From the Epiphany folder, this should be the mods folder
+            string[] newModList = new string[modList.Length];
             for (int i = 0; i < modList.Length; i++)
             {
-                modList[i] = Path.GetFileName(modList[i]);
+				newModList[i] = Path.GetFileName(modList[i]);
             }
-            File.WriteAllLines(Strings.tempDir + "\\" + Strings.modList, modList);
-            Console.ForegroundColor = ConsoleColor.Green;
+            File.WriteAllLines(Strings.tempDir + "\\" + Strings.modDirList, newModList);
+
+			newModList = new string[modList.Length];
+			for (int i = 0; i < modList.Length; i++)
+            {
+                if (File.Exists(modList[i] + "\\metadata.xml")) {
+                    XmlDocument infodoc = new XmlDocument();
+                    infodoc.Load(modList[i] + "\\metadata.xml");
+					
+					newModList[i] = infodoc.GetElementsByTagName("name")[0].InnerXml;
+				}
+			}
+
+            Array.Sort(newModList, StringComparer.Ordinal);
+			File.WriteAllLines(Strings.tempDir + "\\" + Strings.modList, newModList);
+			Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("done");
+
 
 			// --- COPY MOD DATA --- //
 			Console.ForegroundColor = ConsoleColor.Yellow;
@@ -93,6 +113,7 @@ namespace EpiphanyDiag
 			Console.ForegroundColor = ConsoleColor.Green;
 			Console.WriteLine("done");
 
+
 			// --- PACKAGE FILES --- //
 			Console.ForegroundColor = ConsoleColor.Yellow;
             Console.Write("  Packaging files...");
@@ -100,6 +121,7 @@ namespace EpiphanyDiag
             TarFile.CreateFromDirectory(Strings.tempDir, Strings.tempDir + "\\..\\" + Strings.tarFile, false);
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("done");
+
 
             // --- COMPRESS FILES --- //
             Console.ForegroundColor = ConsoleColor.Yellow;
@@ -113,6 +135,7 @@ namespace EpiphanyDiag
             compressor.Close();
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("done");
+
 
             // --- CLEAN UP --- //
             Console.ForegroundColor = ConsoleColor.Yellow;
