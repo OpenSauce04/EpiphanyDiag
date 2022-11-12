@@ -80,26 +80,33 @@ namespace EpiphanyDiag
 			Console.ForegroundColor = ConsoleColor.Yellow;
             Console.Write("  Getting mod list...");
             string[] modList = Directory.GetDirectories(AppDomain.CurrentDomain.BaseDirectory + "..\\"); // From the Epiphany folder, this should be the mods folder
-            string[] newModList = new string[modList.Length];
-            for (int i = 0; i < modList.Length; i++)
+			string[] newModList = new string[modList.Length];
+
+			for (int i = 0; i < modList.Length; i++)
             {
 				newModList[i] = Path.GetFileName(modList[i]);
             }
             File.WriteAllLines(Strings.tempDir + "\\" + Strings.modDirList, newModList);
 
 			newModList = new string[modList.Length];
+			string[] newModListEnabled = new string[modList.Length];
 			for (int i = 0; i < modList.Length; i++)
             {
                 if (File.Exists(modList[i] + "\\metadata.xml")) {
                     XmlDocument infodoc = new XmlDocument();
                     infodoc.Load(modList[i] + "\\metadata.xml");
-					
+
 					newModList[i] = infodoc.GetElementsByTagName("name")[0].InnerXml;
+                    if (!File.Exists(modList[i] + "\\disable.it")) {
+					    newModListEnabled[i] = infodoc.GetElementsByTagName("name")[0].InnerXml;
+                    }
 				}
 			}
 
-            Array.Sort(newModList, StringComparer.Ordinal);
+			Array.Sort(newModList, StringComparer.Ordinal);
+			Array.Sort(newModListEnabled, StringComparer.Ordinal);
 			File.WriteAllLines(Strings.tempDir + "\\" + Strings.modList, newModList);
+			File.WriteAllLines(Strings.tempDir + "\\" + Strings.modListEnabled, newModListEnabled);
 			Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("done");
 
