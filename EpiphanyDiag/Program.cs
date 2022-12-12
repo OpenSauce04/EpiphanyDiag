@@ -93,12 +93,19 @@ namespace EpiphanyDiag
 			for (int i = 0; i < modList.Length; i++)
             {
                 if (File.Exists(modList[i] + "\\metadata.xml")) {
-                    XmlDocument infodoc = new XmlDocument();
-                    infodoc.Load(modList[i] + "\\metadata.xml");
+                    try
+                    {
+                        XmlDocument infodoc = new XmlDocument();
+                        infodoc.Load(modList[i] + "\\metadata.xml");
 
-					newModList[i] = infodoc.GetElementsByTagName("name")[0].InnerXml;
-                    if (!File.Exists(modList[i] + "\\disable.it")) {
-					    newModListEnabled[i] = infodoc.GetElementsByTagName("name")[0].InnerXml;
+                        newModList[i] = infodoc.GetElementsByTagName("name")[0].InnerXml;
+                        if (!File.Exists(modList[i] + "\\disable.it"))
+                        {
+                            newModListEnabled[i] = infodoc.GetElementsByTagName("name")[0].InnerXml;
+                        }
+                    } catch (XmlException e)
+                    {
+                        Console.Write("\nERROR 4: An XML exception has occurred. Name #"+(i+1)+" has been skipped.");
                     }
 				}
 			}
