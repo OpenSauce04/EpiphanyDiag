@@ -26,20 +26,20 @@ namespace EpiphanyDiag
                     validFolder = true;
                     break;
                 } else {
-                    ErrorString = "ERROR 1: Could not find Isaac Repentance log folder!";
+                    ErrorString = Strings.Error.e1;
                 }
             }
 
 			if (new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory).Parent.Name != "mods")
 			{
 				validFolder = false;
-				ErrorString = "ERROR 3: This mod is not placed in the Isaac mods folder.\nPlease place Epiphany in the same folder as the rest of your mods";
+				ErrorString = Strings.Error.e3;
 			}
 
 			if (!File.Exists(AppDomain.CurrentDomain.BaseDirectory + "\\metadata.xml"))
             {
                 validFolder = false;
-                ErrorString = "ERROR 2: This program is being run outside of the Epiphany folder.";
+                ErrorString = Strings.Error.e2;
             }
 
 			if (validFolder) {
@@ -105,7 +105,7 @@ namespace EpiphanyDiag
                         }
                     } catch (XmlException e)
                     {
-                        Console.Write("\nERROR 4: An XML exception has occurred. Name #"+(i+1)+" has been skipped.");
+                        Console.Write("\n"+Strings.Error.e4(i));
                     }
 				}
 			}
