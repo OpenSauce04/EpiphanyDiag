@@ -3,6 +3,7 @@ using System.Formats.Tar;
 using System.IO;
 using System.IO.Compression;
 using System.Xml;
+using System.Linq;
 
 namespace EpiphanyDiag
 {
@@ -109,6 +110,8 @@ namespace EpiphanyDiag
                     }
 				}
 			}
+
+            newModListEnabled = newModListEnabled.Where(x => !string.IsNullOrEmpty(x)).ToArray();
 
 			Array.Sort(newModList, StringComparer.Ordinal);
 			Array.Sort(newModListEnabled, StringComparer.Ordinal);
