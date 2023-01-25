@@ -104,8 +104,8 @@ namespace EpiphanyDiag
                         {
                             newModListEnabled[i] = infodoc.GetElementsByTagName("name")[0].InnerXml;
                         }
-                    } catch (XmlException e)
-                    {
+                    } catch (XmlException)
+					{
                         Console.Write("\n"+Strings.Error.e4(i));
                     }
 				}
