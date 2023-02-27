@@ -29,5 +29,5 @@ module Helpers =
                 Directory.CreateDirectory(Path.Combine(dest, dirName)) |> ignore
             cloneDirectory directory (Path.Combine(dest, dirName))
 
-            for file in Directory.GetFiles(root) do
-                File.Copy(file, Path.Combine(dest, Path.GetFileName(file)));
+        for file in Directory.GetFiles(root) do
+           File.Copy(file, Path.Combine(dest, Path.GetFileName(file)));
