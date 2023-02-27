@@ -77,7 +77,7 @@ module Main =
             with
                 | :? XmlException -> printf "\n%s" (Strings.Error.E4(i))
 
-    let modListEnabledClean = modListEnabled.Where(fun x ->  x |> String.IsNullOrEmpty).ToArray()
+    let modListEnabledClean = modListEnabled.Where( fun x -> not (String.IsNullOrEmpty(x)) ).ToArray()
 
     Array.Sort(modDirList, StringComparer.Ordinal)
     Array.Sort(modListEnabledClean, StringComparer.Ordinal)
