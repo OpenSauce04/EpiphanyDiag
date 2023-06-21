@@ -94,15 +94,20 @@ module Main =
 
     // --- FIND AND SHOW WARNINGS --- //
     cprintfn ConsoleColor.Yellow "  Checking for problematic mods..."
-
+    
+    let mutable warnList = ""
     for modName in modList do
         let issueSeverity = BadMod.Check(modName)
 
         if issueSeverity = BadMod.Severity.Low then
             cprintfn ConsoleColor.Yellow "%s" ("    Warning: \"" + modName + "\" is known to cause minor gameplay issues.")
+            warnList <- warnList + modName + ": " + "Minor"
 
         elif issueSeverity = BadMod.Severity.High then
             cprintfn ConsoleColor.Red "%s" ("    Warning: \"" + modName + "\" is known to cause severe gameplay issues! If you are experiencing issues, consider removing it.")
+            warnList <- warnList + modName + ": " + "Severe"
+
+    File.WriteAllText(Strings.TempDir + "\\" + Strings.WarningLog, warnList)
 
 
     // --- COPY MOD DATA --- //
