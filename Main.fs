@@ -92,6 +92,19 @@ module Main =
     cprintfn ConsoleColor.Green "done"
 
 
+    // --- FIND AND SHOW WARNINGS --- //
+    cprintfn ConsoleColor.Yellow "  Checking for problematic mods..."
+
+    for modName in modList do
+        let issueSeverity = BadMod.Check(modName)
+
+        if issueSeverity = BadMod.Severity.Low then
+            cprintfn ConsoleColor.Yellow "%s" ("    Warning: \"" + modName + "\" is known to cause minor gameplay issues.")
+
+        elif issueSeverity = BadMod.Severity.High then
+            cprintfn ConsoleColor.Red "%s" ("    Warning: \"" + modName + "\" is known to cause severe gameplay issues! If you are experiencing issues, consider removing it.")
+
+
     // --- COPY MOD DATA --- //
     cprintf ConsoleColor.Yellow "  Copying mod data..."
     Directory.CreateDirectory(Strings.TempDir + "\\" + Strings.DataDir) |> ignore
