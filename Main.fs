@@ -14,8 +14,11 @@ module Main =
     cprintf ConsoleColor.DarkRed "Epiphany "
     cprintf ConsoleColor.White "Diagnostics Tool %s | " Strings.VersionNumber
     cprintfn ConsoleColor.DarkGray "Written by OpenSauce\nSource available at: https://github.com/OpenSauce04/EpiphanyDiag"
-            
-    let logFiles = Directory.GetFiles(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "\\Documents\\My Games\\Binding of Isaac Repentance", "*.txt", SearchOption.TopDirectoryOnly)
+    let logFiles =
+        try
+            Directory.GetFiles(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "\\Documents\\My Games\\Binding of Isaac Repentance", "*.txt", SearchOption.TopDirectoryOnly)
+        with
+            | :? DirectoryNotFoundException -> throw Strings.Error.E1; reraise()
 
     let mutable validFolder = false
 
