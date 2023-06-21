@@ -9,7 +9,7 @@
   <ItemGroup>
     <Compile Include="Helpers.fs" />
     <Compile Include="Strings.fs" />
-    <Compile Include="Program.fs" />
+    <Compile Include="Main.fs" />
   </ItemGroup>
 
   <ItemGroup>
