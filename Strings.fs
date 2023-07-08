@@ -16,6 +16,7 @@ module Strings =
     let DataDir = "modData";
     let EpiphanyManifest = "epiphanyManifest.xml";
     let WarningLog = "warningLog.txt"
+
     module Error =
         let E1 = "ERROR 1: Could not find Isaac Repentance log folder!";
         let E2 = "ERROR 2: This program is being run outside of the Epiphany folder.";

@@ -95,17 +95,33 @@ module Main =
     // --- FIND AND SHOW WARNINGS --- //
     cprintfn ConsoleColor.Yellow "  Checking for problematic mods..."
     
+    let mutable hasMEC = false
     let mutable warnList = ""
     for modName in modList do
         let issueSeverity = BadMod.Check(modName)
 
         if issueSeverity = BadMod.Severity.Low then
-            cprintfn ConsoleColor.Yellow "%s" ("    Warning: \"" + modName + "\" is known to cause minor gameplay issues.")
-            warnList <- warnList + modName + ": " + "Minor"
+            cprintfn ConsoleColor.Yellow "%s" ("    Warning Lv1: \"" + modName + "\" is known to cause minor gameplay issues.")
+            warnList <- warnList + modName + ": " + "Minor\n"
+
+        elif issueSeverity = BadMod.Severity.Mid then
+            cprintfn ConsoleColor.DarkYellow "%s" ("    Warning Lv3: \"" + modName + "\" is known to cause moderate gameplay issues.")
+            warnList <- warnList + modName + ": " + "Moderate\n"
 
         elif issueSeverity = BadMod.Severity.High then
-            cprintfn ConsoleColor.Red "%s" ("    Warning: \"" + modName + "\" is known to cause severe gameplay issues! If you are experiencing issues, consider removing it.")
-            warnList <- warnList + modName + ": " + "Severe"
+            cprintfn ConsoleColor.Red "%s" ("    Warning Lv4: \"" + modName + "\" is known to cause severe gameplay issues! If you are experiencing issues, consider removing it.")
+            warnList <- warnList + modName + ": " + "Severe\n"
+
+        elif issueSeverity = BadMod.Severity.Inconsistent then
+            cprintfn ConsoleColor.Magenta "%s" ("    Warning Lv2: \"" + modName + "\" has been observed to cause gameplay issues under specific circumstances.")
+            warnList <- warnList + modName + ": " + "Inconsistent\n"
+
+        if modName = "ModErrorContainer" then
+            hasMEC <- true
+
+    if not hasMEC then
+        cprintfn ConsoleColor.Cyan "%s" ("    Mod Error Container is not installed. Usage of this mod improves the stability of the game when using mods, and is highly recommended.")
+        warnList <- warnList + "\nMod Error Container is missing."
 
     File.WriteAllText(Strings.TempDir + "\\" + Strings.WarningLog, warnList)
 
