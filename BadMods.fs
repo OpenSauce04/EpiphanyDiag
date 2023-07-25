@@ -23,6 +23,7 @@ module BadMod =
                 "Siren, Playable Character (Rep/AB+)", Severity.Inconsistent;
                 "Wario's Cap", Severity.High;
                 "Quality Control", Severity.High;
+                "!!Mod Config Menu - Continued", Severity.High;
 
             ]|>Map.ofList)[modName]
 
