@@ -24,6 +24,7 @@ module BadMod =
                 "Wario's Cap", Severity.High;
                 "Quality Control", Severity.High;
                 "!!Mod Config Menu - Continued", Severity.High;
+                "!!(REP)Music Mod Callback", Severity.Low;
 
             ]|>Map.ofList)[modName]
 
