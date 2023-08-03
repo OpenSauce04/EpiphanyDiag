@@ -116,10 +116,7 @@ module Main =
             cprintfn ConsoleColor.Magenta "%s" ("    Warning Lv2: \"" + modName + "\" has been observed to cause gameplay issues under specific circumstances.")
             warnList <- warnList + modName + ": " + "Inconsistent\n"
 
-        if modName = "ModErrorContainer" then
-            hasMEC <- true
-
-    if not hasMEC then
+    if not (modList.Contains("ModErrorContainer")) then
         cprintfn ConsoleColor.Cyan "%s" ("    Mod Error Container is not installed. Usage of this mod improves the stability of the game when using mods, and is highly recommended.")
         warnList <- warnList + "\nMod Error Container is missing."
 
