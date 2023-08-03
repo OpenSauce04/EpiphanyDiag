@@ -100,20 +100,28 @@ module Main =
         let issueSeverity = BadMod.Check(modName)
 
         if issueSeverity = BadMod.Severity.Low then
-            cprintfn ConsoleColor.Yellow "%s" ("    Warning Lv1: \"" + modName + "\" is known to cause minor gameplay issues.")
-            warnList <- warnList + modName + ": " + "Minor\n"
+            cprintf ConsoleColor.Yellow "%s" ("    Warning Lv1: \"" + modName + "\" is known to cause minor gameplay issues.")
+            warnList <- warnList + modName + ": " + "Minor"
 
         elif issueSeverity = BadMod.Severity.Mid then
-            cprintfn ConsoleColor.DarkYellow "%s" ("    Warning Lv3: \"" + modName + "\" is known to cause moderate gameplay issues.")
-            warnList <- warnList + modName + ": " + "Moderate\n"
+            cprintf ConsoleColor.DarkYellow "%s" ("    Warning Lv3: \"" + modName + "\" is known to cause moderate gameplay issues.")
+            warnList <- warnList + modName + ": " + "Moderate"
 
         elif issueSeverity = BadMod.Severity.High then
-            cprintfn ConsoleColor.Red "%s" ("    Warning Lv4: \"" + modName + "\" is known to cause severe gameplay issues! If you are experiencing issues, consider removing it.")
-            warnList <- warnList + modName + ": " + "Severe\n"
+            cprintf ConsoleColor.Red "%s" ("    Warning Lv4: \"" + modName + "\" is known to cause severe gameplay issues! If you are experiencing issues, consider removing it.")
+            warnList <- warnList + modName + ": " + "Severe"
 
         elif issueSeverity = BadMod.Severity.Inconsistent then
-            cprintfn ConsoleColor.Magenta "%s" ("    Warning Lv2: \"" + modName + "\" has been observed to cause gameplay issues under specific circumstances.")
-            warnList <- warnList + modName + ": " + "Inconsistent\n"
+            cprintf ConsoleColor.Magenta "%s" ("    Warning Lv2: \"" + modName + "\" has been observed to cause gameplay issues under specific circumstances.")
+            warnList <- warnList + modName + ": " + "Inconsistent"
+
+        if not (modListEnabled.Contains(modName)) then
+            cprintf ConsoleColor.Gray "%s" (" (this mod is disabled)")
+            warnList <- warnList + " | DISABLED"
+        
+        if issueSeverity <> BadMod.Severity.None then
+            printf "\n"
+            warnList <- warnList + "\n"
 
     if not (modList.Contains("ModErrorContainer")) then
         cprintfn ConsoleColor.Cyan "%s" ("    Mod Error Container is not installed. Usage of this mod improves the stability of the game when using mods, and is highly recommended.")
