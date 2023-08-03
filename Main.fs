@@ -95,7 +95,6 @@ module Main =
     // --- FIND AND SHOW WARNINGS --- //
     cprintfn ConsoleColor.Yellow "  Checking for problematic mods..."
     
-    let mutable hasMEC = false
     let mutable warnList = ""
     for modName in modList do
         let issueSeverity = BadMod.Check(modName)
