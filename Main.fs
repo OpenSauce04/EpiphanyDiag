@@ -114,12 +114,11 @@ module Main =
         elif issueSeverity = BadMod.Severity.Inconsistent then
             cprintf ConsoleColor.Magenta "%s" ("    Warning Lv2: \"" + modName + "\" has been observed to cause gameplay issues under specific circumstances.")
             warnList <- warnList + modName + ": " + "Inconsistent"
-
-        if not (modListEnabled.Contains(modName)) then
-            cprintf ConsoleColor.Gray "%s" (" (this mod is disabled)")
-            warnList <- warnList + " | DISABLED"
         
         if issueSeverity <> BadMod.Severity.None then
+            if not (modListEnabled.Contains(modName)) then
+                cprintf ConsoleColor.Gray "%s" (" (this mod is disabled)")
+                warnList <- warnList + " | DISABLED"
             printf "\n"
             warnList <- warnList + "\n"
 
