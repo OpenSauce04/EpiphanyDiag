@@ -25,6 +25,7 @@ module BadMod =
                 "Quality Control", Severity.High;
                 "!!Mod Config Menu - Continued", Severity.High;
                 "!!(REP)Music Mod Callback", Severity.Low;
+                "!!!Mod Compatibility Hack", Severity.High;
 
             ]|>Map.ofList)[modName]
 
