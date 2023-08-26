@@ -103,7 +103,7 @@ module Main =
             cprintf ConsoleColor.Yellow "%s" ("    Warning Lv1: \"" + modName + "\" is known to cause minor gameplay issues.")
             warnList <- warnList + modName + ": " + "Minor"
 
-        elif issueSeverity = BadMod.Severity.Mid then
+        elif issueSeverity = BadMod.Severity.Medium then
             cprintf ConsoleColor.DarkYellow "%s" ("    Warning Lv3: \"" + modName + "\" is known to cause moderate gameplay issues.")
             warnList <- warnList + modName + ": " + "Moderate"
 

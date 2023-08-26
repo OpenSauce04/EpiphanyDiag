@@ -7,7 +7,7 @@ module BadMod =
     type Severity =
         | None
         | Low
-        | Mid
+        | Medium
         | High
         | Inconsistent
 
@@ -17,7 +17,7 @@ module BadMod =
 
                 "Godhead", Severity.High;
                 "[REP] Co-op plus", Severity.High;
-                "Mei", Severity.Mid;
+                "Mei", Severity.Medium;
                 "Maid in the Mist, Playable Character (Rep)", Severity.Inconsistent;
                 "Heart tokens for the Lost!", Severity.High;
                 "Siren, Playable Character (Rep/AB+)", Severity.Inconsistent;
@@ -26,6 +26,9 @@ module BadMod =
                 "!!Mod Config Menu - Continued", Severity.High;
                 "!!(REP)Music Mod Callback", Severity.Low;
                 "!!!Mod Compatibility Hack", Severity.High;
+                "The Philosopher's Stone", Severity.Inconsistent;
+                "Beggars Purgatory", Severity.Inconsistent;
+                "Better Coop Item Pedestals", Severity.Medium;
 
             ]|>Map.ofList)[modName]
 
