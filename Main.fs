@@ -101,15 +101,15 @@ module Main =
 
         if issueSeverity = BadMod.Severity.Low then
             cprintf ConsoleColor.Yellow "%s" ("    Warning Lv1: \"" + modName + "\" is known to cause minor gameplay issues.")
-            warnList <- warnList + modName + ": " + "Minor"
+            warnList <- warnList + modName + ": " + "Low Severity"
 
         elif issueSeverity = BadMod.Severity.Medium then
             cprintf ConsoleColor.DarkYellow "%s" ("    Warning Lv3: \"" + modName + "\" is known to cause moderate gameplay issues.")
-            warnList <- warnList + modName + ": " + "Moderate"
+            warnList <- warnList + modName + ": " + "Medium Severity"
 
         elif issueSeverity = BadMod.Severity.High then
             cprintf ConsoleColor.Red "%s" ("    Warning Lv4: \"" + modName + "\" is known to cause severe gameplay issues! If you are experiencing issues, consider removing it.")
-            warnList <- warnList + modName + ": " + "Severe"
+            warnList <- warnList + modName + ": " + "High Severity"
 
         elif issueSeverity = BadMod.Severity.Inconsistent then
             cprintf ConsoleColor.Magenta "%s" ("    Warning Lv2: \"" + modName + "\" has been observed to cause gameplay issues under specific circumstances.")
