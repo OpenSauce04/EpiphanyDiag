@@ -4,7 +4,7 @@ open System.IO
 
 module Strings =
 
-    let VersionNumber = "2.1.5"
+    let VersionNumber = "2.1.5a"
 
     let TempDir = Path.GetTempPath() + "\\EpiphanyDiag";
     let TarFile = "EpiphanyDiagnostics.tar";
