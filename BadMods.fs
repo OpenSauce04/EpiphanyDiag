@@ -28,6 +28,7 @@ module BadMod =
                 "The Philosopher's Stone", Severity.Inconsistent;
                 "Beggars Purgatory", Severity.Inconsistent;
                 "Better Coop Item Pedestals", Severity.Medium;
+                "The Specialist for Good Items", Severity.Medium;
 
             ]|>Map.ofList)[modName]
 
