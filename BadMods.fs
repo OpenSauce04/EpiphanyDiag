@@ -15,7 +15,6 @@ module BadMod =
         try
             ([ 
 
-                "Godhead", Severity.High;
                 "[REP] Co-op plus", Severity.High;
                 "Mei", Severity.Medium;
                 "Maid in the Mist, Playable Character (Rep)", Severity.Inconsistent;

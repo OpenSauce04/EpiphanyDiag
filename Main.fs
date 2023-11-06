@@ -17,7 +17,7 @@ module Main =
 
     let logFiles =
         try
-            Directory.GetFiles(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "\\Documents\\My Games\\Binding of Isaac Repentance", "*.txt", SearchOption.TopDirectoryOnly)
+            Directory.GetFiles(Strings.IsaacLogDir, "*.txt", SearchOption.TopDirectoryOnly)
         with
             | :? DirectoryNotFoundException -> throw Strings.Error.E1; reraise()
 
