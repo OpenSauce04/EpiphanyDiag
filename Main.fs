@@ -19,7 +19,11 @@ module Main =
         try
             Directory.GetFiles(Strings.IsaacLogDir, "*.txt", SearchOption.TopDirectoryOnly)
         with
-            | :? DirectoryNotFoundException -> throw Strings.Error.E1; reraise()
+            | :? DirectoryNotFoundException -> 
+                try
+                    Directory.GetFiles(Strings.AltIsaacLogDir, "*.txt", SearchOption.TopDirectoryOnly)
+                with | :? DirectoryNotFoundException -> 
+                    throw Strings.Error.E1; reraise()
 
     let mutable validFolder = false
 

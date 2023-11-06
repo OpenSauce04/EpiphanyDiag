@@ -14,6 +14,7 @@ module Strings =
     let ModList = "modNameList.txt"
     let ModListEnabled = "modNameListEnabled.txt"
     let IsaacLogDir = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "\\Documents\\My Games\\Binding of Isaac Repentance"
+    let AltIsaacLogDir = "..\\..\\Documents\\My Games\\Binding of Isaac Repentance"
     let LogDir = "logs"
     let DataDir = "modData"
     let EpiphanyManifest = "epiphanyManifest.xml"
