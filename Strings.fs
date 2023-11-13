@@ -2,11 +2,12 @@
 
 open System
 open System.IO
+open System.Reflection
 
 module Strings =
 
-    let VersionNumber = "2.1.5a"
-
+    let private version = Assembly.GetExecutingAssembly().GetName().Version
+    let VersionNumber = $"{version.Major}.{version.Minor}.{version.Build}"
     let TempDir = Path.GetTempPath() + "\\EpiphanyDiag"
     let TarFile = "EpiphanyDiagnostics.tar"
     let GzipFile = "EpiphanyDiagnostics.tar.gz"

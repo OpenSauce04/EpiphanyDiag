@@ -4,6 +4,7 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>net7.0</TargetFramework>
     <ApplicationIcon>icon.ico</ApplicationIcon>
+    <Version>2.1.6</Version>
   </PropertyGroup>
 
   <ItemGroup>
