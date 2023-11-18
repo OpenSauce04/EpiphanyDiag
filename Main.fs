@@ -12,8 +12,9 @@ open Helpers
 module Main =
 
     cprintf ConsoleColor.DarkRed "Epiphany "
-    cprintf ConsoleColor.White "Diagnostics Tool %s | " Strings.VersionNumber
-    cprintfn ConsoleColor.DarkGray "Written by OpenSauce\nSource available at: https://github.com/OpenSauce04/EpiphanyDiag"
+    cprintf ConsoleColor.White "Diagnostics Tool %s" Strings.VersionNumber
+    cprintf ConsoleColor.Gray " | "
+    cprintfn ConsoleColor.DarkGray "Written by OpenSauce\nSource available at: https://github.com/OpenSauce04/EpiphanyDiag\n"
 
     let logFiles =
         try
@@ -167,7 +168,7 @@ module Main =
     File.Delete(Strings.TempDir + "\\..\\" + Strings.TarFile)
     cprintfn ConsoleColor.Green "done"
 
-    cprintfn ConsoleColor.Green "Finished!\n"
+    cprintfn ConsoleColor.Green "Finished!"
     cprintfn ConsoleColor.Yellow "Diagnostic information saved to %s" Strings.GzipFile
-    cprintfn ConsoleColor.White "Press any key to exit."
+    cprintfn ConsoleColor.White "\nPress any key to exit."
     Console.ReadKey() |> ignore

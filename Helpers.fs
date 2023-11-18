@@ -17,7 +17,7 @@ module Helpers =
 
     let throw error =
         cprintfn ConsoleColor.Red "%s" error
-        cprintfn ConsoleColor.White "Press any key to exit."
+        cprintfn ConsoleColor.White "\nPress any key to exit."
         Console.ReadKey() |> ignore
         exit 1
         ()
