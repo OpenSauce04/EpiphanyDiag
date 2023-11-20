@@ -16,15 +16,14 @@ module Main =
     cprintf ConsoleColor.Gray " | "
     cprintfn ConsoleColor.DarkGray "Written by OpenSauce\nSource available at: https://github.com/OpenSauce04/EpiphanyDiag\n"
 
-    let logFiles =
-        try
-            Directory.GetFiles(Strings.IsaacLogDir, "*.txt", SearchOption.TopDirectoryOnly)
-        with | :? DirectoryNotFoundException ->
-            try
-                Directory.GetFiles(Strings.AltIsaacLogDir, "*.txt", SearchOption.TopDirectoryOnly)
-            with | :? DirectoryNotFoundException ->
-                throw Strings.Error.E1; reraise()
+    let mutable logFiles = Array.zeroCreate 0
 
+    for path in Strings.IsaacLogDirs do
+        try 
+            logFiles <- Directory.GetFiles(path, "*.txt", SearchOption.TopDirectoryOnly)
+        with | :? DirectoryNotFoundException -> 
+            ()
+            
     let mutable validFolder = false
 
     for filePath in logFiles do

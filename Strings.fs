@@ -14,8 +14,11 @@ module Strings =
     let ModDirList = "modDirList.txt"
     let ModList = "modNameList.txt"
     let ModListEnabled = "modNameListEnabled.txt"
-    let IsaacLogDir = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "\\Documents\\My Games\\Binding of Isaac Repentance"
-    let AltIsaacLogDir = "..\\..\\Documents\\My Games\\Binding of Isaac Repentance"
+    let IsaacLogDirs = [
+                        Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "\\Documents\\My Games\\Binding of Isaac Repentance"; // Steam log directory
+                        Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "\\Documents\\My Games\\Binding of Isaac Repentance (Epic)"; // EGS log directory
+                        "..\\..\\Documents\\My Games\\Binding of Isaac Repentance"; // Fallback log directory (used in case the usual directory is unaccessible)
+                       ] 
     let LogDir = "logs"
     let DataDir = "modData"
     let EpiphanyManifest = "epiphanyManifest.xml"
