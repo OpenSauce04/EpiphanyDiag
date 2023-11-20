@@ -18,7 +18,7 @@ module Main =
 
     let mutable logFiles = Array.zeroCreate 0
 
-    for path in Strings.IsaacLogDirs do
+    for path in Strings.IsaacLogDirs |> List.rev do
         try 
             logFiles <- Directory.GetFiles(path, "*.txt", SearchOption.TopDirectoryOnly)
         with | :? DirectoryNotFoundException -> 
