@@ -8,6 +8,7 @@ open System.Xml
 open System.Linq
 
 open Helpers
+open ModBlacklist
 
 module Main =
 
@@ -100,25 +101,25 @@ module Main =
     
     let mutable warnList = ""
     for modName in modList do
-        let issueSeverity = BadMod.Check(modName)
+        let issueSeverity = CheckMod(modName)
 
-        if issueSeverity = BadMod.Severity.Low then
+        if issueSeverity = Severity.Low then
             cprintf ConsoleColor.Yellow "%s" ("    Warning Lv1: \"" + modName + "\" is known to cause minor gameplay issues.")
             warnList <- warnList + modName + ": " + "Low Severity"
 
-        elif issueSeverity = BadMod.Severity.Medium then
+        elif issueSeverity = Severity.Medium then
             cprintf ConsoleColor.DarkYellow "%s" ("    Warning Lv3: \"" + modName + "\" is known to cause moderate gameplay issues.")
             warnList <- warnList + modName + ": " + "Medium Severity"
 
-        elif issueSeverity = BadMod.Severity.High then
+        elif issueSeverity = Severity.High then
             cprintf ConsoleColor.Red "%s" ("    Warning Lv4: \"" + modName + "\" is known to cause severe gameplay issues! If you are experiencing issues, consider removing it.")
             warnList <- warnList + modName + ": " + "High Severity"
 
-        elif issueSeverity = BadMod.Severity.Inconsistent then
+        elif issueSeverity = Severity.Inconsistent then
             cprintf ConsoleColor.Magenta "%s" ("    Warning Lv2: \"" + modName + "\" has been observed to cause gameplay issues under specific circumstances.")
             warnList <- warnList + modName + ": " + "Inconsistent"
         
-        if issueSeverity <> BadMod.Severity.None then
+        if issueSeverity <> Severity.None then
             if not (modListEnabled.Contains(modName)) then
                 cprintf ConsoleColor.Gray "%s" (" (this mod is disabled)")
                 warnList <- warnList + " | DISABLED"

@@ -2,7 +2,7 @@
 
 open System.Collections.Generic
 
-module BadMod =
+module ModBlacklist =
 
     type Severity =
         | None
@@ -11,7 +11,7 @@ module BadMod =
         | High
         | Inconsistent
 
-    let Check modName =
+    let CheckMod modName =
         try
             ([ 
 

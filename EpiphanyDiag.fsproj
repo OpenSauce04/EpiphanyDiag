@@ -10,7 +10,7 @@
   <ItemGroup>
     <Compile Include="Strings.fs" />
     <Compile Include="Helpers.fs" />
-    <Compile Include="BadMods.fs" />
+    <Compile Include="ModBlacklist.fs" />
     <Compile Include="Main.fs" />
   </ItemGroup>
 
