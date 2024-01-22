@@ -13,8 +13,8 @@ open ModBlacklist
 module Main =
 
     cprintf ConsoleColor.DarkRed "Epiphany "
-    cprintf ConsoleColor.White "Diagnostics Tool %s" Strings.VersionNumber
-    cprintf ConsoleColor.Gray " | "
+    cprintf ConsoleColor.White "Diagnostics Tool"
+    cprintf ConsoleColor.Gray " (%s) | " Strings.VersionNumber
     cprintfn ConsoleColor.DarkGray "Written by OpenSauce\nSource available at: https://github.com/OpenSauce04/EpiphanyDiag\n"
 
     let mutable logFiles = Array.zeroCreate 0

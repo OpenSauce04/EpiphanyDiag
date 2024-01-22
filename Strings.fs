@@ -7,7 +7,7 @@ open System.Reflection
 module Strings =
 
     let private version = Assembly.GetExecutingAssembly().GetName().Version
-    let VersionNumber = $"{version.Major}.{version.Minor}.{version.Build}"
+    let VersionNumber = $"rev. {version.Major}"
     let TempDir = Path.GetTempPath() + "\\EpiphanyDiag"
     let TarFile = "EpiphanyDiagnostics.tar"
     let GzipFile = "EpiphanyDiagnostics.tar.gz"
