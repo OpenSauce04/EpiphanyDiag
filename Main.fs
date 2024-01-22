@@ -87,7 +87,6 @@ module Main =
                 | :? XmlException -> printf "\n%s" (Strings.Error.E4(rawModList[i]))
                                      warnList <- warnList + $"Metadata in mod directory '{rawModList[i]}' caused an XML exception\n"
 
-
     let modListEnabledClean = modListEnabled.Where( fun x -> not (String.IsNullOrEmpty(x)) ).ToArray()
 
     Array.Sort(modDirList, StringComparer.Ordinal)
