@@ -27,5 +27,5 @@ module Strings =
     module Error =
         let E1 = "ERROR 1: Could not find Isaac Repentance log folder!"
         let E2 = "ERROR 2: This program is being run outside of the Epiphany folder.\nPlease move EpiphanyDiag.exe into the same folder as Epiphany's 'metadata.xml' file and try again."
-        let E3 = "ERROR 3: This mod is not placed in the Isaac mods folder.\nPlease place Epiphany in the 'mods' folder under your Isaac installation."
+        let E3 = "ERROR 3: Epiphany is not placed in the Isaac mods folder.\nPlease place Epiphany in the 'mods' folder under your Isaac installation."
         let E4 modIndex = "ERROR 4: An XML exception has occurred. Name #" + string(modIndex + 1) + " has been skipped."
