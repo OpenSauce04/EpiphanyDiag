@@ -30,6 +30,7 @@ module ModBlacklist =
                 "Better Coop Item Pedestals", Severity.Medium;
                 "The Specialist for Good Items", Severity.Medium;
                 "Stats+", Severity.Low;
+                "Godhead", Severity.Inconsistent;
 
             ]|>Map.ofList)[modName]
 
