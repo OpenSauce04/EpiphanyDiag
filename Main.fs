@@ -72,6 +72,7 @@ module Main =
 
     let modList = Array.create rawModList.Length ""
     let modListEnabled = Array.create rawModList.Length ""
+    let mutable warnList = ""
 
     for  i = 0 to rawModList.Length-1 do
         if File.Exists(rawModList[i] + "\\metadata.xml") then
@@ -83,7 +84,9 @@ module Main =
                 if not (File.Exists(rawModList[i] + "\\disable.it")) then
                     modListEnabled[i] <- infodoc.GetElementsByTagName("name").[0].InnerXml
             with
-                | :? XmlException -> printf "\n%s" (Strings.Error.E4(i))
+                | :? XmlException -> printf "\n%s" (Strings.Error.E4(rawModList[i]))
+                                     warnList <- warnList + $"Metadata in mod directory '{rawModList[i]}' caused an XML exception\n"
+
 
     let modListEnabledClean = modListEnabled.Where( fun x -> not (String.IsNullOrEmpty(x)) ).ToArray()
 
@@ -99,7 +102,6 @@ module Main =
     // --- FIND AND SHOW WARNINGS --- //
     cprintfn ConsoleColor.Yellow "  Checking for problematic mods..."
     
-    let mutable warnList = ""
     for modName in modList do
         let issueSeverity = CheckMod(modName)
 
