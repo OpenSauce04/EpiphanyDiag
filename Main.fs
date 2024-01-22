@@ -14,7 +14,7 @@ module Main =
 
     cprintf ConsoleColor.DarkRed "Epiphany "
     cprintf ConsoleColor.White "Diagnostics Tool"
-    cprintf ConsoleColor.Gray " (%s) | " Strings.VersionNumber
+    cprintf ConsoleColor.Gray $" ({Strings.VersionNumber}) | "
     cprintfn ConsoleColor.DarkGray "Written by OpenSauce\nSource available at: https://github.com/OpenSauce04/EpiphanyDiag\n"
 
     let mutable logFiles = Array.zeroCreate 0
@@ -106,30 +106,30 @@ module Main =
         let issueSeverity = CheckMod(modName)
 
         if issueSeverity = Severity.Low then
-            cprintf ConsoleColor.Yellow "%s" ("    Warning Lv1: \"" + modName + "\" is known to cause minor gameplay issues.")
+            cprintf ConsoleColor.Yellow $"    Warning Lv1: \"{modName}\" is known to cause minor gameplay issues."
             warnList <- warnList + modName + ": " + "Low Severity"
 
         elif issueSeverity = Severity.Medium then
-            cprintf ConsoleColor.DarkYellow "%s" ("    Warning Lv3: \"" + modName + "\" is known to cause moderate gameplay issues.")
+            cprintf ConsoleColor.DarkYellow $"    Warning Lv3: \"{modName}\" is known to cause moderate gameplay issues."
             warnList <- warnList + modName + ": " + "Medium Severity"
 
         elif issueSeverity = Severity.High then
-            cprintf ConsoleColor.Red "%s" ("    Warning Lv4: \"" + modName + "\" is known to cause severe gameplay issues! If you are experiencing issues, consider removing it.")
+            cprintf ConsoleColor.Red $"    Warning Lv4: \"{modName}\" is known to cause severe gameplay issues! If you are experiencing issues, consider removing it."
             warnList <- warnList + modName + ": " + "High Severity"
 
         elif issueSeverity = Severity.Inconsistent then
-            cprintf ConsoleColor.Magenta "%s" ("    Warning Lv2: \"" + modName + "\" has been observed to cause gameplay issues under specific circumstances.")
+            cprintf ConsoleColor.Magenta $"    Warning Lv2: \"{modName}\" has been observed to cause gameplay issues under specific circumstances."
             warnList <- warnList + modName + ": " + "Inconsistent"
         
         if issueSeverity <> Severity.None then
             if not (modListEnabled.Contains(modName)) then
-                cprintf ConsoleColor.Gray "%s" (" (this mod is disabled)")
+                cprintf ConsoleColor.Gray " (this mod is disabled)"
                 warnList <- warnList + " | DISABLED"
             printf "\n"
             warnList <- warnList + "\n"
 
     if not (modList.Contains("ModErrorContainer")) then
-        cprintfn ConsoleColor.Cyan "%s" ("    Mod Error Container is not installed. Usage of this mod improves the stability of the game when using mods, and is highly recommended.")
+        cprintfn ConsoleColor.Cyan "    Mod Error Container is not installed. Usage of this mod improves the stability of the game when using mods, and is highly recommended."
         warnList <- warnList + "\nMod Error Container is missing."
 
     File.WriteAllText(Strings.TempDir + "\\" + Strings.WarningLog, warnList)
@@ -171,6 +171,6 @@ module Main =
     cprintfn ConsoleColor.Green "done"
 
     cprintfn ConsoleColor.Green "Finished!"
-    cprintfn ConsoleColor.Yellow "Diagnostic information saved to %s" Strings.GzipFile
+    cprintfn ConsoleColor.Yellow $"Diagnostic information saved to {Strings.GzipFile}"
     cprintfn ConsoleColor.White "\nPress any key to exit."
     Console.ReadKey() |> ignore
