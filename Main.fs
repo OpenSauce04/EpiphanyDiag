@@ -84,8 +84,8 @@ module Main =
                 if not (File.Exists(rawModList[i] + "\\disable.it")) then
                     modListEnabled[i] <- infodoc.GetElementsByTagName("name").[0].InnerXml
             with
-                | :? XmlException -> printf "\n%s" (Strings.Error.E4(rawModList[i]))
-                                     warnList <- warnList + $"Metadata in mod directory '{rawModList[i]}' caused an XML exception\n"
+                | :? XmlException -> printf "\n%s" (Strings.Error.E4(Path.GetFileName(rawModList[i])))
+                                     warnList <- warnList + $"Metadata in mod directory '{Path.GetFileName(rawModList[i])}' caused an XML exception\n"
 
     let modListEnabledClean = modListEnabled.Where( fun x -> not (String.IsNullOrEmpty(x)) ).ToArray()
 
