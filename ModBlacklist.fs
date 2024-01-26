@@ -31,6 +31,7 @@ module ModBlacklist =
                 "The Specialist for Good Items", Severity.Medium;
                 "Stats+", Severity.Low;
                 "Godhead", Severity.Inconsistent;
+                "Fancy Costumes", Severity.Medium;
 
             ]|>Map.ofList)[modName]
 
