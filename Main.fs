@@ -105,19 +105,19 @@ module Main =
         let issueSeverity = CheckMod(modName)
 
         if issueSeverity = Severity.Low then
-            cprintf ConsoleColor.Yellow $"    Warning Lv1: \"{modName}\" is known to cause minor gameplay issues."
+            cprintf ConsoleColor.Yellow $"    Warning Lv1: \"{modName}\" is known to cause minor issues which may not be noticeable."
             warnList <- warnList + modName + ": " + "Low Severity"
 
         elif issueSeverity = Severity.Medium then
-            cprintf ConsoleColor.DarkYellow $"    Warning Lv3: \"{modName}\" is known to cause moderate gameplay issues."
+            cprintf ConsoleColor.DarkYellow $"    Warning Lv3: \"{modName}\" is known to cause very noticeable issues. You probably want to remove it."
             warnList <- warnList + modName + ": " + "Medium Severity"
 
         elif issueSeverity = Severity.High then
-            cprintf ConsoleColor.Red $"    Warning Lv4: \"{modName}\" is known to cause severe gameplay issues! If you are experiencing issues, consider removing it."
+            cprintf ConsoleColor.Red $"    Warning Lv4: \"{modName}\" is known to cause very severe game issues! Please remove it!"
             warnList <- warnList + modName + ": " + "High Severity"
 
         elif issueSeverity = Severity.Inconsistent then
-            cprintf ConsoleColor.Magenta $"    Warning Lv2: \"{modName}\" has been observed to cause gameplay issues under specific circumstances."
+            cprintf ConsoleColor.Magenta $"    Warning Lv2: \"{modName}\" has been observed to cause gameplay issues under certain circumstances. If you experience issues, try removing it."
             warnList <- warnList + modName + ": " + "Inconsistent"
         
         if issueSeverity <> Severity.None then
