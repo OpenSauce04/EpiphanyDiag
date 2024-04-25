@@ -34,6 +34,7 @@ module ModBlacklist =
                 "Fancy Costumes", Severity.Medium;
                 "Nemesis", Severity.High;
                 "Co-op Fixes", Severity.High;
+                "Belson", Severity.High;
 
             ]|>Map.ofList)[modName]
 
