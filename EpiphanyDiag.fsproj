@@ -4,7 +4,7 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>net7.0</TargetFramework>
     <ApplicationIcon>icon.ico</ApplicationIcon>
-    <Version>20</Version>
+    <Version>21</Version>
   </PropertyGroup>
 
   <ItemGroup>
