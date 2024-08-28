@@ -37,6 +37,7 @@ module ModBlacklist =
                 "Belson", Severity.High;
                 "True SpiderMod NEW", Severity.High;
                 "No Pickup Cap", Severity.Medium;
+                "Post Item Pickup Callback", Severity.High;
 
             ]|>Map.ofList)[modName]
 
