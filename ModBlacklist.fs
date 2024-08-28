@@ -36,6 +36,7 @@ module ModBlacklist =
                 "Co-op Fixes", Severity.High;
                 "Belson", Severity.High;
                 "True SpiderMod NEW", Severity.High;
+                "No Pickup Cap", Severity.Medium;
 
             ]|>Map.ofList)[modName]
 
