@@ -38,6 +38,7 @@ module ModBlacklist =
                 "True SpiderMod NEW", Severity.High;
                 "No Pickup Cap", Severity.Medium;
                 "Post Item Pickup Callback", Severity.High;
+                "No More Useless Items: Repentance", Severity.High;
 
             ]|>Map.ofList)[modName]
 
